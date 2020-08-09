@@ -1,5 +1,4 @@
 import * as c from '../constants/user';
-import user from '../reducers/user';
 
 type userParam = {
   discloseId: string,
@@ -20,7 +19,7 @@ const initialState: IState = {
   users: []
 }
 
-export default function user(state = initialState, action) {
+export default function user(state = initialState, action: any) {
   switch (action.type){
     case c.GET_USERS:
       return {
