@@ -22,6 +22,7 @@ const initialState: IState = {
 export default function user(state = initialState, action: any) {
   switch (action.type){
     case c.GET_USERS:
+      console.log(action)
       return {
         ...state,
         users: action.payload.users
