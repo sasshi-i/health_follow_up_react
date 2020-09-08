@@ -1,8 +1,9 @@
-import { getUserJwtToken } from './auth';
+import Cookies from 'js-cookie';
 
-const baseHost = process.env.REACT_APP_API_BASE_HOST;
+export const baseApiHost = process.env.REACT_APP_API_BASE_HOST;
 
-const json = (token: string, method = 'GET', body: unknown = null) => {
+const json = (method = 'GET', body: unknown = null) => {
+  const token = Cookies.get('jwt');
   const init = {
     method: method,
     mode: 'cors',
@@ -24,3 +25,11 @@ const json = (token: string, method = 'GET', body: unknown = null) => {
 export const option = {
   json,
 };
+
+export const isSuccess = (response: any) => {
+  return response.ok
+    ? response.json()
+    : response.json().then((error: any) => {
+      throw Error(error)
+    })
+}

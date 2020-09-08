@@ -1,14 +1,15 @@
 import * as React from 'react';
+import { getUserJwtToken } from '../../utils/auth';
 
 class Signin extends React.Component {
   state = {
     email: '',
     password: '',
   }
-
+// TODO: jwtトークンの期限が切れていた時に再度ログインしてもらう処理
   login(): void {
     const { email, password } = this.state;
-    // TODO: ログイン処理の実装
+    getUserJwtToken(email, password);
   }
 
   render() {
