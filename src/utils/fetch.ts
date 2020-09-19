@@ -3,10 +3,15 @@ import Cookies from 'js-cookie';
 export const baseApiHost = process.env.REACT_APP_API_BASE_HOST;
 
 const json = (method = 'GET', body: unknown = null) => {
-  const token = Cookies.get('jwt');
+  let token = Cookies.get('jwt');
+  if (!token) {
+    // TODO: トークンリフレッシュの処理を入れたい
+    window.alert('長時間操作されなかったので再度ログインしてください');
+    window.location.href = '/';
+  }
   const init = {
     method: method,
-    mode: 'cors',
+    mode: 'cors' as 'cors',
     headers: {
       Authorization: 'Bearer ' + token,
       Accept: 'application/json',
